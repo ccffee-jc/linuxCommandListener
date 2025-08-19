@@ -77,10 +77,6 @@ public class CommandServiceImpl implements CommandService, InitializingBean {
         } finally {
             if (p != null) {p.destroy();}
         }
-        // remove System.lineSeparator() (actually it's '\n') in the end of res if exists
-        if (StringUtils.isNotBlank(res) && res.endsWith(System.lineSeparator())) {
-            res = res.substring(0, res.lastIndexOf(System.lineSeparator()));
-        }
         return res;
     }
 
@@ -97,7 +93,7 @@ public class CommandServiceImpl implements CommandService, InitializingBean {
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
-                sb.append(line);
+                sb.append(line).append(System.lineSeparator());
             }
             return sb.toString();
         }
